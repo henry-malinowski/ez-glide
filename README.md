@@ -1,7 +1,7 @@
 # ⛸ EZGlide (Exponential-Zoom & Glide)
 
-[![Foundry Version](https://img.shields.io/badge/Foundry-v13.0.0+-blue.svg)](https://foundryvtt.com)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Foundry Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dfor-the-badge%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fhenry-malinowski%2Fez-glide%2Frefs%2Fheads%2Fmain%2Fmodule.json)](https://foundryvtt.com)
+[![License](https://img.shields.io/github/license/henry-malinowski/ez-glide?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
 Smooths canvas zooming and panning with animated, exponential easing for a more polished tabletop experience.
 
@@ -38,7 +38,7 @@ For players who can't get their GM to install modules, use the companion macro:
 
 ## Configuration
 
-Access settings through **Configuration** → **Module Settings** → **EZGlide**:
+Access settings through **Game Settings (tab)** → **⚙ Configure Settings** → **⛸ EZGlide (Exponential-Zoom & Glide)**:
 
 - **Smooth Zoom**: Enable/disable smooth zooming behavior
     - **Zoom Smoothing Factor**: Controls animation speed (Lower values have slower convergence, higher values are faster.)
@@ -51,7 +51,7 @@ All settings are **user-scoped**, allowing individual players to disable smooth 
 ## Technical Details
 
 - **Dependencies**: Requires [lib-wrapper](https://github.com/ruipin/fvtt-lib-wrapper)
-- **Conflicts**: Incompatible with aeris-smooth-camera (both modify canvas interaction). Note: unlike aeris-smooth-camera, this modules allows for simultanious panning and zooming.
+- **Conflicts**: Incompatible with [aeris-smooth-camera](https://foundryvtt.com/packages/aeris-smooth-camera) (both modify canvas interaction). Note: unlike aeris-smooth-camera, this modules allows for simultaneous panning and zooming.
 
 ## License
 
