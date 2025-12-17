@@ -6,7 +6,7 @@
 Smooths canvas zooming and panning with animated, exponential easing for a more polished tabletop experience.
 
 ## Demo
-[ez-glide.webm](https://github.com/user-attachments/assets/ffe362e1-eb5d-436b-8011-465ac30a26eb)
+[ez-glide.webm](https://github.com/user-attachments/assets/959e2b86-87aa-4074-97d9-2a5f2dbcaf3f)
 
 ## Features
 
