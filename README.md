@@ -6,6 +6,7 @@
 Smooths canvas zooming and panning with animated, exponential easing for a more polished tabletop experience.
 
 ## Demo
+
 [ez-glide.webm](https://github.com/user-attachments/assets/959e2b86-87aa-4074-97d9-2a5f2dbcaf3f)
 
 ## Features
@@ -41,10 +42,10 @@ For players who can't get their GM to install modules, use the companion macro:
 Access settings through **Game Settings (tab)** → **⚙ Configure Settings** → **⛸ EZGlide (Exponential-Zoom & Glide)**:
 
 - **Smooth Zoom**: Enable/disable smooth zooming behavior
-    - **Zoom Smoothing Factor**: Controls animation speed (Lower values have slower convergence, higher values are faster.)
-    - **Zoom Step Size**: Multiplier for each wheel scroll (Foundry's default is equivlent to 1.05, but higher values pair well with smooth zooming)
+  - **Zoom Smoothing Factor**: Controls animation speed (Lower values have slower convergence, higher values are faster.)
+  - **Zoom Step Size**: Multiplier for each wheel scroll (Foundry's default is equivlent to 1.05, but higher values pair well with smooth zooming)
 - **Smooth Panning**: Enable/disable smooth panning behavior
-    - **Pan Smoothing Factor**: Controls pan animation speed
+  - **Pan Smoothing Factor**: Controls pan animation speed
 
 All settings are **user-scoped**, allowing individual players to disable smooth controls while others keep them enabled.
 

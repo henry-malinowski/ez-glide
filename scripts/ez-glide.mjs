@@ -14,8 +14,8 @@ const settings = {
   zoomStep: 1.12
 };
 const animationState = {
-  currentView: {x: 0, y: 0, scale: 1},
-  targetView: {x: 0, y: 0, scale: 1},
+  currentView: { x: 0, y: 0, scale: 1 },
+  targetView: { x: 0, y: 0, scale: 1 },
   viewTicker: null,
   lastViewTime: 0
 };
@@ -44,20 +44,20 @@ const MODE_HANDLERS = {
         'foundry.canvas.Canvas.prototype._onMouseWheel',
         function zoomOnlyWheel(event) {
           const canvas = this;
-          
+
           // Sync current state
           syncViewState(canvas);
-          
+
           // Compute target scale - accumulate on animationState.targetView.scale
           const dz = event.deltaY < 0 ? settings.zoomStep : 1 / settings.zoomStep;
-          animationState.targetView.scale = canvas._constrainView({scale: dz * animationState.targetView.scale}).scale;
-          
+          animationState.targetView.scale = canvas._constrainView({ scale: dz * animationState.targetView.scale }).scale;
+
           startViewTicker(canvas);
         },
         libWrapper.OVERRIDE
       );
     },
-    
+
     createTicker(canvas) {
       // Zoom-only ticker: animate scale using direct manipulation
       return () => {
@@ -65,7 +65,7 @@ const MODE_HANDLERS = {
 
         const factor = expDecay(settings.zoomSpeed, dt);
         const rs = lerpSnap(animationState.currentView.scale, animationState.targetView.scale, factor);
-        
+
         animationState.currentView.scale = rs.value;
 
         canvas.stage.scale.set(animationState.currentView.scale, animationState.currentView.scale);
@@ -92,7 +92,7 @@ const MODE_HANDLERS = {
             const factor = expDecay(settings.panSpeed, pt) / denom;
             return lerpSnap(0, 1, factor).value;
           }
-          return wrapper({...args, easing});
+          return wrapper({ ...args, easing });
         },
         libWrapper.WRAPPER
       );
@@ -112,7 +112,7 @@ const MODE_HANDLERS = {
           // INFERENCE CONTRACT: Sync from canvas and pass current scale explicitly
           // Since we're not animating scale, we read it fresh from canvas
           syncViewState(canvas);
-          
+
           const desired = canvas._constrainView({
             x: canvas.stage.pivot.x - (dx * mod),
             y: canvas.stage.pivot.y - (dy * mod),
@@ -132,7 +132,7 @@ const MODE_HANDLERS = {
         libWrapper.OVERRIDE
       );
     },
-    
+
     createTicker(canvas) {
       // Pan-only ticker: animate x/y, read scale live from canvas
       return () => {
@@ -146,12 +146,12 @@ const MODE_HANDLERS = {
 
         animationState.currentView.x = rx.value;
         animationState.currentView.y = ry.value;
-        
+
         // INFERENCE CONTRACT: Read scale fresh from canvas each frame
         // Never animate it - Foundry controls scale in PAN_ONLY mode
         animationState.currentView.scale = canvas.stage.scale.x;
 
-        canvas.pan({...animationState.currentView, [INTERNAL_PAN]: true});
+        canvas.pan({ ...animationState.currentView, [INTERNAL_PAN]: true });
         canvas.updateBlur();
 
         // Align to constrained live values
@@ -168,7 +168,7 @@ const MODE_HANDLERS = {
   BOTH: {
     registerWrappers(libWrapper, MODULE_ID) {
       // Both modes: register pan wrapper, wheel, drag, and animatePan
-      
+
       // Pan wrapper prevents interference when both modes are active
       libWrapper.register(
         MODULE_ID,
@@ -195,7 +195,7 @@ const MODE_HANDLERS = {
             const factor = expDecay(settings.panSpeed, pt) / denom;
             return lerpSnap(0, 1, factor).value;
           }
-          return wrapper({...args, easing});
+          return wrapper({ ...args, easing });
         },
         libWrapper.WRAPPER
       );
@@ -213,8 +213,8 @@ const MODE_HANDLERS = {
           // INFERENCE CONTRACT: Must provide animationState.targetView.scale explicitly
           // All three dimensions are being animated
           const dz = event.deltaY < 0 ? settings.zoomStep : 1 / settings.zoomStep;
-          const targetScale = canvas._constrainView({scale: dz * animationState.targetView.scale}).scale;
-          animationState.targetView = {x: animationState.currentView.x, y: animationState.currentView.y, scale: targetScale};
+          const targetScale = canvas._constrainView({ scale: dz * animationState.targetView.scale }).scale;
+          animationState.targetView = { x: animationState.currentView.x, y: animationState.currentView.y, scale: targetScale };
 
           startViewTicker(canvas);
         },
@@ -235,7 +235,7 @@ const MODE_HANDLERS = {
           const mod = CONFIG.Canvas.dragSpeedModifier;
 
           syncViewState(canvas);
-          
+
           // INFERENCE CONTRACT: Must provide animationState.targetView.scale explicitly
           // Since scale is being animated, we can't let it be inferred
           const desired = canvas._constrainView({
@@ -244,7 +244,7 @@ const MODE_HANDLERS = {
             scale: animationState.targetView.scale  // Explicit: we're animating scale
           });
 
-          animationState.targetView = {x: desired.x, y: desired.y, scale: animationState.targetView.scale};
+          animationState.targetView = { x: desired.x, y: desired.y, scale: animationState.targetView.scale };
           startViewTicker(canvas);
 
           // Mirror core behavior: reset token tab cycling
@@ -253,7 +253,7 @@ const MODE_HANDLERS = {
         libWrapper.OVERRIDE
       );
     },
-    
+
     createTicker(canvas) {
       // Combined ticker: animate x, y, and scale together
       return () => {
@@ -270,7 +270,7 @@ const MODE_HANDLERS = {
         animationState.currentView.y = ry.value;
         animationState.currentView.scale = rs.value;
 
-        canvas.pan({...animationState.currentView, [INTERNAL_PAN]: true});
+        canvas.pan({ ...animationState.currentView, [INTERNAL_PAN]: true });
         canvas.updateBlur();
 
         // Align to constrained live values after pan
@@ -342,7 +342,7 @@ Hooks.once('init', () => {
     scope: 'client',
     config: true,
     type: Number,
-    range: {min: 0.1, max: 25, step: 0.1},
+    range: { min: 0.1, max: 25, step: 0.1 },
     default: settings.zoomSpeed,
     onChange: value => settings.zoomSpeed = value
   });
@@ -354,7 +354,7 @@ Hooks.once('init', () => {
     scope: 'client',
     config: true,
     type: Number,
-    range: {min: 1.01, max: 1.5, step: 0.01},
+    range: { min: 1.01, max: 1.5, step: 0.01 },
     default: settings.zoomStep,
     onChange: value => settings.zoomStep = value
   });
@@ -372,14 +372,14 @@ Hooks.once('init', () => {
       canvas?.draw(); // reload canvas to rebuild from Canvas.prototype.* without a client reload
     }
   });
-  
+
   game.settings.register(MODULE_ID, 'panSpeed', {
     name: 'ez-glide.settings.panSpeed.name',
     hint: 'ez-glide.settings.panSpeed.hint',
     scope: 'client',
     config: true,
     type: Number,
-    range: {min: 0.1, max: 25, step: 0.1},
+    range: { min: 0.1, max: 25, step: 0.1 },
     default: settings.panSpeed,
     onChange: value => settings.panSpeed = value
   });
@@ -425,7 +425,7 @@ Hooks.once('ready', () => {
     ui.notifications.error('ez-glide.warnings.conflictDetected', notificationOptions);
   } else if (errorState.wrapperError) {
     const notificationOptions = {
-      format: {package_id: errorState.wrapperError.package_info.id, error_name: errorState.wrapperError.name},
+      format: { package_id: errorState.wrapperError.package_info.id, error_name: errorState.wrapperError.name },
       permanent: true,
       console: false
     };
@@ -459,7 +459,7 @@ function syncViewState(canvas) {
 
 function alignTargetsToCurrent(canvas) {
   syncViewState(canvas);
-  animationState.targetView = {...animationState.currentView};
+  animationState.targetView = { ...animationState.currentView };
 }
 
 // Foundry builds a single PIXI.Application (PIXI is global) for the canvas in core code and stores
@@ -484,14 +484,14 @@ function startViewTicker(canvas) {
  */
 function getHandlerKey(mode) {
   if (mode === HOOK_MODES.NONE) return 'NONE';
-  
+
   const hasZoom = mode & HOOK_MODES.ZOOMING;
   const hasPan = mode & HOOK_MODES.PANNING;
-  
+
   if (hasZoom && hasPan) return 'BOTH';
   if (hasZoom) return 'ZOOM_ONLY';
   if (hasPan) return 'PAN_ONLY';
-  
+
   return 'NONE';
 }
 
@@ -502,16 +502,16 @@ function getHandlerKey(mode) {
  */
 function registerHooks(mode) {
   libWrapper.unregister_all(MODULE_ID);
-  
+
   // Map HOOK_MODES flags to handler key
   const handlerKey = getHandlerKey(mode);
   const handler = MODE_HANDLERS[handlerKey];
-  
+
   if (!handler) {
     currentHandler = null;
     return;
   }
-  
+
   try {
     handler.registerWrappers(libWrapper, MODULE_ID);
     currentHandler = handler;

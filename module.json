@@ -4,8 +4,8 @@
   "description": "Smooths canvas zooming and panning with animated wheel handling.",
   "version": "1.0.0",
   "compatibility": {
-    "minimum": 13,
-    "verified": "14.352"
+    "minimum": "13",
+    "verified": "14"
   },
   "authors": [
     {
@@ -15,9 +15,7 @@
       "discord": "hmalinowski"
     }
   ],
-  "esmodules": [
-    "scripts/ez-glide.mjs"
-  ],
+  "esmodules": ["scripts/ez-glide.mjs"],
   "languages": [
     {
       "lang": "en",
@@ -47,7 +45,7 @@
   },
   "license": "GPL-v3.0",
   "url": "https://github.com/henry-malinowski/ez-glide",
-  "readme": "https://github.com/henry-malinowski/ez-glide/blob/main/README.md",
+  "readme": "https://github.com/henry-malinowski/ez-glide#readme",
   "bugs": "https://github.com/henry-malinowski/ez-glide/issues",
   "changelog": "https://github.com/henry-malinowski/ez-glide/blob/main/CHANGELOG.md",
   "manifest": "https://github.com/henry-malinowski/ez-glide/releases/latest/download/module.json",

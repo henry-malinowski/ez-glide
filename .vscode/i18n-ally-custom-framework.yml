@@ -11,7 +11,7 @@ usageMatchRegex:
 
 # Refactor templates (optional, for refactoring support)
 refactorTemplates:
-  - "game.i18n.localize(\"$1\")"
-  - "game.i18n.format(\"$1\", $2)"
+  - 'game.i18n.localize("$1")'
+  - 'game.i18n.format("$1", $2)'
 
 monopoly: true
