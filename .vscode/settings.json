@@ -8,9 +8,12 @@
   "i18n-ally.pathMatcher": "{locale}.json",
   "i18n-ally.namespace": false,
   "i18n-ally.readonly": false,
-  "i18n-ally.usage.scanningIgnore": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/.git/**"
-  ],
+  "i18n-ally.usage.scanningIgnore": ["**/node_modules/**", "**/dist/**", "**/.git/**"],
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.format.oxc": "always",
+    "source.fixAll.oxc": "always"
+  }
 }
